@@ -1,0 +1,150 @@
+Podemos definir el producto como una clase//que propiedades tiene y que metodos tiene
+
+INTERACTUA CON EL OBJETO DE LAS VARIABLES:
+PROPIEDADES:NOMBRE-PRECIO-AÑO DE INGRESO
+class Product {
+	constructor(name, price, year){
+		this.name =name;
+		this.price =price;
+		this.year = year;
+}
+
+}
+INTERACTUA CON HTML:
+**********INTERFACE
+class UI
+
+CLASE PARA INTERFAZ Y UNA CLASE PARA EL PRODUCTO
+OBJETO DEL PRODUCTO
+Y OBJETO DE LA INTERFAZ
+
+
+*****************
+INTERACTUA CON DOM CUANDO ESCRIBIMOS DENTRO DE UN INPUT, CUANDO APRETAMOS UN BOTON, CUANDO EL USUARIO A CARGADO LA PAGINA POR PRIMERA VEZ, SON EVENTOS QUE OCURREN DENTRO DEL DOCUMENTO
+EJEMPLO CUANDO EL USUARIO ENVIA LOS DATOS DEL FORMULARIO
+//SUBMIT EN INPUT SE ENCARGA DE DISPRAR ESE EVENTO DEL FORMULARIO
+
+
+para capturar el evento de product form debo agregar un elemento llamado: addEventListener
+
+cuando ocurra ese evento quiero capturar algo a travez de una funcion
+/DOM
+
+
+PARA VER QUE TIENE EL ELEMENTO
+console.log(document.getElementById('name').value)
+PARA CAPTURAR EL ELEMENTO
+ const name = document.getElementById('name').value;
+PARA PODER VER EL DATO POR CONSOLA Y QUE NO SE REFRESQUE LA PANTALLA
+   e.preventDefault();.
+
+        console.log(name, price, year)
+
+*************************EJEMPLO
+//DOM Events
+document.getElementById('product-form')
+    .addEventListener('submit', function(e) {
+        const name = document.getElementById('name').value;
+        const price = document.getElementById('price').value;
+        const year = document.getElementById('year').value;
+
+
+
+        console.log(new Product())
+
+        e.preventDefault();
+});
+********************************
+
+eEMPEZAR A DEFINIR UN NUEVO PRODUCTO CON LOS DATOS Y QUE SE CREE UN NUEVO OBJETO DE UN PRODUCTO
+
+
+******************EJEMPLO
+document.getElementById('product-form')
+    .addEventListener('submit', function(e) {
+        const name = document.getElementById('name').value;
+        const price = document.getElementById('price').value;
+        const year = document.getElementById('year').value;
+
+
+        const product = new Product(name, price, year);
+
+        e.preventDefault();
+});
+************************************
+
+
+PARA MOSTRARLO POR PANTALLA ESE EVENTO UI
+ES TODO LO QUE VA A ESTAR EN NUETRO PRODUCT-LIST
+
+class UI {
+    addProduct(product){//recibe un parametro DEL dom, lo recibe la interfaz, esta es la que interacrua con el DOCUMENTO//ESTO ES UN OBJETO
+        const productList = document.getElementById('product-List');//accedo a la parte que me muetra el producto y lo guardo dentro de una constante
+        const element = document.createElement('div');// creo el div para que luego me muestre el producto
+        element.innerTHML =//para poder mostrar el elemento y dibujar el div
+            <divc class=" card text-center mb-4">//DISEÑO
+                <div class="card-body">
+                    <strong>Product Name</strong>: ${product.name}
+                    <strong>Product Price</strong>: ${product.price}
+                    <strong>Product year</strong>: ${product.year}
+                </div>
+            </div>
+        ;
+        productList.appendChild(element);//LE PASO EL ELEMENTO PARA MOSTRARLO POR PANTALLA MEDIANTE ESTA FUNCION 
+    }
+//DOM Events
+document.getElementById('product-form')
+    .addEventListener('submit', function(e) {
+        const name = document.getElementById('name').value;
+        const price = document.getElementById('price').value;
+        const year = document.getElementById('year').value;
+
+        const product = new Product(name, price, year);
+
+        const ui = new UI();
+        ui.addProduct(product);
+
+        e.preventDefault();
+});
+
+
+*************************************
+CREO UN ELEMENTO PARA RESETEAR //
+PARA HACERLO.. LUEDO DE LLAMAR EL PRODUCTO ui.addProduct(product);.... quiero que lo resetee.. en el evento..element.innerHTML...
+PARA QUE DESDE class UI
+ resetForm()
+
+*************************************
+DELETE
+<a href="#" class="btn btn-danger" name="delete">Delete</a>
+creo un evento para que cuando haga clik en el boton DELETE BORRE
+
+//DOM TOMO EL ELEMENTO A BORRAR DE LA PAGINA
+document.getElementById('product-list').addEventListener('click',function(e) {
+    const ui = new UI();
+    ui.deleteProduct(e.target);
+})
+
+AGARRO EL ELEMENTO PARA BORRAR EL EVENTO QUE QUIERO BORRAR...SIGUE ABAJO
+  deleteProduct(element){
+        if(element.name === 'delete'){
+            console.log(element.parentElement.parentElement.parentElement.remove())
+        }
+    }
+PARA EL PUNTO ANTERIOR ME BASE EN LOS PRODUCTOS A BORRAR AGARRE LAS CAJAS QUE LOS CONTIENEN HASTA ELIMINAR LA TARJETA POR COMPLETO
+HAY TRES ELEMENTOS PADRE QUE CORRESPONDEN A...
+class UI {
+    addProduct(product){
+        const productList = document.getElementById('product-list');
+        const element = document.createElement('div');//Y EL DIV CREADO EN PRIMERA INSTANCIA ES EL TERCER ELEMENTO PADRE
+        element.innerHTML = `
+            <div class="card text-center mb-4">//CARD  TEXT// ES EL SEGUNDO ELEMENTO PADRE
+                <div class="card-body">//CARD-BODY ES EL PRIMER ELEMENTO PADRE
+                    <strong>Product</strong>: ${product.name} -
+                    <strong>Price</strong>: ${product.price} - 
+                    <strong>Year</strong>: ${product.year}
+                    <a href="#" class="btn btn-danger" name="delete">Delete</a>
+                </div>
+            </div>
+        `;
+

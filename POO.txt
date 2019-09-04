@@ -1,0 +1,37 @@
+constante pelicula{
+//propiedades
+
+
+}
+creamos un objeto para q la peli tenga nombre, id
+A demas puede tener funcionalidad
+
+
+
+clases... son como una plantilla de objetos
+
+class Pelicula {//se van a crear una plantilla de peliculas//ocupamos este molde para hacer muchas peliculas iguales
+ constructor()//es para construir objetos.. dentro van las propiedades de nuestro objeto
+}
+
+INSTANCIAR UN OBJETO... CREARLO
+
+
+cont peliculaUno = new Pelicula();REUTILIZACION DEL CODIGO
+cont peliculaDoS = new Pelicula();
+
+console.log(peliculaDos)
+
+
+LAS FUNCIONES SE LLAMAN METODOS
+LAS VARIABLES this.nombre  SE LLAMAN PROPIEDADES
+
+
+
+
+class Serie extends Pelicula {
+
+    constructor(nombre,id,cap){//PARA AGREGAR UN NUEVO PARAMETRO PARA LAS SERIES
+        super(nombre,id);
+        this.cap = cap;//CREADO
+    }
